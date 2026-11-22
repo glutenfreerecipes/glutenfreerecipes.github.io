@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://glutenfreerecipes.github.io/sitemap.xml

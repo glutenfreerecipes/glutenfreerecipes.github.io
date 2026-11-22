@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gluten Free Recipes — Gluten-free cooking that tastes like the real thing</title>
+<meta name="description" content="Gluten Free Recipes — gluten-free baking, bread, pasta, and everyday meals, with flour converter and meal planner tools.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+
+*{box-sizing:border-box}body{margin:0;background:#faf3e7;color:#4a3423;font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.site-header{background:#8b5e34;border-bottom:3px solid #c89b6a;padding:18px 0}
+.brand{color:#fff8ec;font-size:28px;font-weight:bold;text-decoration:none}
+.tagline{color:#ecd9bd;margin:4px 0 10px}
+.nav a{color:#fff8ec;text-decoration:none;margin-right:18px;font-weight:bold}.nav a:hover{color:#ecd9bd}
+.hero{background:#fff;border:1px solid #e5d3b8;border-left:5px solid #8b5e34;border-radius:8px;padding:28px;margin:24px 0}
+.hero h1{margin:0 0 8px;color:#7a4a21}
+h1,h2,h3{color:#7a4a21}
+.tool{background:#fff;border:1px solid #e5d3b8;border-left:5px solid #8b5e34;border-radius:8px;padding:18px;margin:16px 0}
+.tool h3{margin-top:0}
+label{display:block;margin:8px 0 4px;font-weight:bold}
+input,select{width:100%;max-width:340px;padding:9px;border-radius:6px;border:1px solid #c9a886;background:#fff;color:#4a3423}
+button{background:#8b5e34;color:#fff;border:none;padding:10px 18px;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:10px}
+button:hover{background:#7a4a21}
+.result{margin-top:12px;padding:10px;background:#fdf6ea;border-left:4px solid #8b5e34;border-radius:4px}
+.note{background:#fdf6ea;border:1px solid #c89b6a;border-radius:8px;padding:12px 16px}
+.gf-list{list-style:none;padding:0}
+.gf-list li{display:flex;gap:16px;background:#fff;border:1px solid #e5d3b8;border-radius:8px;padding:14px;margin:12px 0;align-items:flex-start}
+.thumb{flex:0 0 140px}
+.thumb svg{width:140px;height:100px;border-radius:6px;display:block}
+.gf-list a{color:#7a4a21;font-weight:bold;text-decoration:none;font-size:18px}
+.gf-list p{margin:6px 0 0;font-size:15px}
+.card-img{width:140px;height:100px;object-fit:cover;border-radius:6px;display:block;margin-bottom:0}
+.featured-img{width:100%;height:auto;border-radius:8px;margin:12px 0}
+.guide h1{color:#7a4a21}.lede{font-size:18px}
+.site-footer{background:#8b5e34;border-top:3px solid #c89b6a;padding:20px 0;margin-top:40px;color:#ecd9bd}
+.site-footer a{color:#fff8ec}
+a{color:#7a4a21}
+@media(max-width:600px){.brand{font-size:22px}.gf-list li{flex-direction:column}.thumb{flex:none}.card-img{width:100%;height:auto}}
+
+</style>
+</head>
+<body>
+<header class="site-header"><div class="wrap"><a class="brand" href="index.html">Gluten Free Recipes</a><p class="tagline">Gluten-free cooking that tastes like the real thing</p><nav class="nav"><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a></nav></div></header>
+<main class="wrap">
+<section class="hero"><h1>Gluten-Free Cooking That Tastes Like the Real Thing</h1><p>Baking, bread, pasta, and family dinners without gluten — practical recipes and guides for celiac disease and gluten-free living, plus free tools to help you cook with confidence.</p></section>
+<p class="note">Important: if you have celiac disease or a wheat allergy, always check labels and look for certified gluten-free products. This site is general information only — talk to your doctor or a registered dietitian before changing your diet.</p>
+<section><h2>Free Gluten-Free Tools</h2><div class="tool"><h3>Gluten-Free Recipe Filter</h3><p>Filter our guides by category.</p>
+<label>Show me</label><select id="gfFilter"><option value="all">All recipes</option><option value="baking">Baking</option><option value="breakfast">Breakfast</option><option value="meals">Lunch and dinner</option><option value="dessert">Desserts and snacks</option><option value="guides">Guides</option></select>
+<button onclick="gfFilter()">Filter recipes</button><div class="result" id="gfFilterOut">Choose a category and press the button.</div></div>
+<div class="tool"><h3>Gluten-Free Flour Converter</h3><p>Convert a wheat flour amount to a gluten-free flour blend. Most recipes work with a 1-to-1 gluten-free blend, plus xanthan gum if the blend does not already include it.</p>
+<label>Wheat flour in the recipe (g)</label><input type="number" id="flourG" value="250" min="1">
+<label>Your blend already contains xanthan gum?</label><select id="flourX"><option value="yes">Yes</option><option value="no">No — add it</option></select>
+<button onclick="flourConvert()">Convert</button><div class="result" id="flourOut">Enter the flour amount and press convert.</div></div>
+<div class="tool"><h3>Serving Scaler</h3><p>Scale any recipe up or down. Enter the amount of one ingredient for the original servings, then choose the servings you want.</p>
+<label>Amount in the recipe (g or ml)</label><input type="number" id="gfScBase" value="250" min="1">
+<label>Servings in the recipe</label><input type="number" id="gfScFrom" value="4" min="1">
+<label>Servings you want</label><input type="number" id="gfScTo" value="6" min="1">
+<button onclick="gfScaler()">Scale recipe</button><div class="result" id="gfScOut">Enter the amounts and press scale.</div></div>
+<div class="tool"><h3>Ingredient Checker</h3><p>Check whether a common ingredient is usually gluten-free. Always read the label, because brands and factories differ.</p>
+<label>Ingredient</label><select id="ingCheck"><option value="rice">Rice</option><option value="oats">Oats</option><option value="soy">Soy sauce</option><option value="corn">Corn / maize</option><option value="quinoa">Quinoa</option><option value="barley">Barley</option><option value="rye">Rye</option><option value="buckwheat">Buckwheat</option><option value="lentils">Lentils</option><option value="couscous">Couscous</option></select>
+<button onclick="ingredientCheck()">Check ingredient</button><div class="result" id="ingOut">Choose an ingredient and press check.</div></div>
+<div class="tool"><h3>Gluten-Free Meal Planner</h3><p>Pick a day and get a simple gluten-free meal plan.</p>
+<label>Day</label><select id="gfDay"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select>
+<button onclick="gfMealPlan()">Show my plan</button><div class="result" id="gfMealOut">Choose a day and press the button.</div></div></section>
+<section><h2>All Gluten-Free Guides</h2><ul class="gf-list"><li><div class="thumb"><img src="images/gluten-free-baking.jpg" alt="Gluten-Free Baking" class="card-img"></div><div><a href="guides/gluten-free-baking.html">Gluten-Free Baking</a><p>How to bake without gluten, the best flour blends, and why resting dough and xanthan gum matter.</p></div></li><li><div class="thumb"><img src="images/gluten-free-bread.jpg" alt="Gluten-Free Bread" class="card-img"></div><div><a href="guides/gluten-free-bread.html">Gluten-Free Bread</a><p>How to bake gluten-free bread at home, which flours work, and how to get a soft loaf that slices well.</p></div></li><li><div class="thumb"><img src="images/pasta-alternatives.jpg" alt="Pasta Alternatives" class="card-img"></div><div><a href="guides/pasta-alternatives.html">Pasta Alternatives</a><p>The best gluten-free pasta and pasta alternatives, from rice noodles to courgette ribbons and lentil pasta.</p></div></li><li><div class="thumb"><img src="images/gluten-free-breakfast.jpg" alt="Gluten-Free Breakfast" class="card-img"></div><div><a href="guides/gluten-free-breakfast.html">Gluten-Free Breakfast</a><p>Easy gluten-free breakfast ideas, from oats and eggs to pancakes and toast, without the sugar trap.</p></div></li><li><div class="thumb"><img src="images/eating-out-gluten-free.jpg" alt="Eating Out Gluten-Free" class="card-img"></div><div><a href="guides/eating-out-gluten-free.html">Eating Out Gluten-Free</a><p>How to eat out safely without gluten, what to ask, which cuisines work best, and how to handle mistakes.</p></div></li><li><div class="thumb"><img src="images/celiac-disease-basics.jpg" alt="Celiac Disease Basics" class="card-img"></div><div><a href="guides/celiac-disease-basics.html">Celiac Disease Basics</a><p>What celiac disease is, how it is diagnosed, why a strict gluten-free diet matters, and how to live well with it.</p></div></li><li><div class="thumb"><img src="images/gluten-free-pizza.jpg" alt="Gluten-Free Pizza" class="card-img"></div><div><a href="guides/gluten-free-pizza.html">Gluten-Free Pizza</a><p>How to make gluten-free pizza with a crisp base, the best doughs, and topping ideas that work.</p></div></li><li><div class="thumb"><img src="images/gluten-free-cookies.jpg" alt="Gluten-Free Cookies" class="card-img"></div><div><a href="guides/gluten-free-cookies.html">Gluten-Free Cookies</a><p>How to bake gluten-free cookies that are crisp, chewy, and not crumbly, with recipes and fixes.</p></div></li><li><div class="thumb"><img src="images/gluten-free-cakes.jpg" alt="Gluten-Free Cakes" class="card-img"></div><div><a href="guides/gluten-free-cakes.html">Gluten-Free Cakes</a><p>How to bake moist gluten-free cakes, which recipes work best, and how to avoid a dry or sunken cake.</p></div></li><li><div class="thumb"><img src="images/gluten-free-muffins.jpg" alt="Gluten-Free Muffins" class="card-img"></div><div><a href="guides/gluten-free-muffins.html">Gluten-Free Muffins</a><p>How to bake light gluten-free muffins, the best flavours, and why resting the batter matters.</p></div></li><li><div class="thumb"><img src="images/gluten-free-pancakes.jpg" alt="Gluten-Free Pancakes" class="card-img"></div><div><a href="guides/gluten-free-pancakes.html">Gluten-Free Pancakes</a><p>How to make fluffy gluten-free pancakes, the best flours, and sweet and savoury topping ideas.</p></div></li><li><div class="thumb"><img src="images/gluten-free-snacks.jpg" alt="Gluten-Free Snacks" class="card-img"></div><div><a href="guides/gluten-free-snacks.html">Gluten-Free Snacks</a><p>Healthy gluten-free snacks for work, school, and travel, plus the packaged snacks to check carefully.</p></div></li><li><div class="thumb"><img src="images/gluten-free-lunch-ideas.jpg" alt="Gluten-Free Lunch Ideas" class="card-img"></div><div><a href="guides/gluten-free-lunch-ideas.html">Gluten-Free Lunch Ideas</a><p>Easy gluten-free lunches for home and work, from salads and soups to wraps and leftovers.</p></div></li><li><div class="thumb"><img src="images/gluten-free-dinner-recipes.jpg" alt="Gluten-Free Dinner Recipes" class="card-img"></div><div><a href="guides/gluten-free-dinner-recipes.html">Gluten-Free Dinner Recipes</a><p>Five easy gluten-free dinners the whole family can eat, from stir-fries to curries and pasta.</p></div></li><li><div class="thumb"><img src="images/gluten-free-flour-guide.jpg" alt="Gluten-Free Flour Guide" class="card-img"></div><div><a href="guides/gluten-free-flour-guide.html">Gluten-Free Flour Guide</a><p>A guide to gluten-free flours: rice, sorghum, buckwheat, almond, chickpea, and how to blend them.</p></div></li><li><div class="thumb"><img src="images/gluten-free-oats.jpg" alt="Gluten-Free Oats" class="card-img"></div><div><a href="guides/gluten-free-oats.html">Gluten-Free Oats</a><p>Are oats gluten-free? How to choose certified oats, and the best ways to use them.</p></div></li><li><div class="thumb"><img src="images/cross-contamination-guide.jpg" alt="Cross-Contamination Guide" class="card-img"></div><div><a href="guides/cross-contamination-guide.html">Cross-Contamination Guide</a><p>How to prevent gluten cross-contact at home, in shared kitchens, and when eating out.</p></div></li><li><div class="thumb"><img src="images/gluten-free-shopping-list.jpg" alt="Gluten-Free Shopping List" class="card-img"></div><div><a href="guides/gluten-free-shopping-list.html">Gluten-Free Shopping List</a><p>A complete gluten-free shopping list for the first shop, plus label-reading tips and budget advice.</p></div></li><li><div class="thumb"><img src="images/gluten-free-desserts.jpg" alt="Gluten-Free Desserts" class="card-img"></div><div><a href="guides/gluten-free-desserts.html">Gluten-Free Desserts</a><p>Easy gluten-free desserts, from flourless chocolate cake to fruit crumbles and pavlova.</p></div></li><li><div class="thumb"><img src="images/gluten-free-holiday-recipes.jpg" alt="Gluten-Free Holiday Recipes" class="card-img"></div><div><a href="guides/gluten-free-holiday-recipes.html">Gluten-Free Holiday Recipes</a><p>Gluten-free recipes for holidays and celebrations, from Christmas dinner to birthday cake.</p></div></li></ul></section>
+</main>
+<footer class="site-footer"><div class="wrap"><p>Gluten Free Recipes — Gluten-free cooking that tastes like the real thing</p><p><a href="about.html">About</a> | <a href="contact.html">Contact</a> | <a href="privacy.html">Privacy Policy</a> | <a href="disclaimer.html">Disclaimer</a></p><p>Content on this site is for general information only and is not medical advice.</p></div></footer>
+<script>
+
+function gfFilter(){var f=document.getElementById('gfFilter').value;
+var lists={'all':['gluten-free-baking','gluten-free-bread','pasta-alternatives','gluten-free-breakfast','eating-out-gluten-free','celiac-disease-basics','gluten-free-pizza','gluten-free-cookies','gluten-free-cakes','gluten-free-muffins','gluten-free-pancakes','gluten-free-snacks','gluten-free-lunch-ideas','gluten-free-dinner-recipes','gluten-free-flour-guide','gluten-free-oats','cross-contamination-guide','gluten-free-shopping-list','gluten-free-desserts','gluten-free-holiday-recipes'],
+'baking':['gluten-free-baking','gluten-free-bread','gluten-free-cookies','gluten-free-cakes','gluten-free-muffins','gluten-free-pancakes','gluten-free-flour-guide'],
+'breakfast':['gluten-free-breakfast','gluten-free-pancakes','gluten-free-muffins','gluten-free-oats'],
+'meals':['gluten-free-lunch-ideas','gluten-free-dinner-recipes','gluten-free-pizza','pasta-alternatives','eating-out-gluten-free'],
+'dessert':['gluten-free-desserts','gluten-free-cookies','gluten-free-cakes','gluten-free-snacks','gluten-free-holiday-recipes'],
+'guides':['celiac-disease-basics','cross-contamination-guide','gluten-free-shopping-list','gluten-free-flour-guide','gluten-free-oats','eating-out-gluten-free']};
+var names={'gluten-free-baking':'Gluten-Free Baking','gluten-free-bread':'Gluten-Free Bread','pasta-alternatives':'Pasta Alternatives','gluten-free-breakfast':'Gluten-Free Breakfast','eating-out-gluten-free':'Eating Out Gluten-Free','celiac-disease-basics':'Celiac Disease Basics','gluten-free-pizza':'Gluten-Free Pizza','gluten-free-cookies':'Gluten-Free Cookies','gluten-free-cakes':'Gluten-Free Cakes','gluten-free-muffins':'Gluten-Free Muffins','gluten-free-pancakes':'Gluten-Free Pancakes','gluten-free-snacks':'Gluten-Free Snacks','gluten-free-lunch-ideas':'Gluten-Free Lunch Ideas','gluten-free-dinner-recipes':'Gluten-Free Dinner Recipes','gluten-free-flour-guide':'Gluten-Free Flour Guide','gluten-free-oats':'Gluten-Free Oats','cross-contamination-guide':'Cross-Contamination Guide','gluten-free-shopping-list':'Gluten-Free Shopping List','gluten-free-desserts':'Gluten-Free Desserts','gluten-free-holiday-recipes':'Gluten-Free Holiday Recipes'};
+var html='<strong>Matching guides:</strong><ul>';var arr=lists[f];for(var i=0;i<arr.length;i++){html+='<li><a href="guides/'+arr[i]+'.html">'+names[arr[i]]+'</a></li>';}html+='</ul>';
+document.getElementById('gfFilterOut').innerHTML=html;}
+function flourConvert(){var g=parseFloat(document.getElementById('flourG').value),x=document.getElementById('flourX').value;
+if(!g||g<=0){document.getElementById('flourOut').textContent='Please enter a valid flour amount.';return;}
+var gum=(g/250*0.5).toFixed(1);
+var msg='Use <strong>'+g+' g of 1-to-1 gluten-free flour blend</strong> instead of '+g+' g wheat flour.';
+if(x==='no'){msg+=' Add about <strong>'+gum+' g (roughly 1/2 teaspoon per 250 g)</strong> of xanthan gum to help the dough hold together.';}
+else{msg+=' Your blend already contains a binder, so no extra xanthan gum is needed.';}
+msg+=' Expect a slightly softer dough and let batters rest for 10 minutes before baking.';
+document.getElementById('flourOut').innerHTML=msg;}
+function gfScaler(){var base=parseFloat(document.getElementById('gfScBase').value),from=parseFloat(document.getElementById('gfScFrom').value),to=parseFloat(document.getElementById('gfScTo').value);
+if(!base||!from||!to||from<=0||to<=0){document.getElementById('gfScOut').textContent='Please enter valid numbers.';return;}
+var scaled=base*to/from;
+document.getElementById('gfScOut').innerHTML='For <strong>'+to+' servings</strong> you need <strong>'+scaled+' g/ml</strong> of this ingredient (base '+base+' x '+to+' / '+from+'). Scale every ingredient by the same factor.';}
+function ingredientCheck(){var v=document.getElementById('ingCheck').value;
+var r={'rice':'<strong>Rice — naturally gluten-free.</strong> Plain rice, rice flour and rice noodles are safe, but check flavoured or pre-seasoned packets for added wheat.',
+'oats':'<strong>Oats — check the label.</strong> Oats are naturally gluten-free but are often grown and processed with wheat. Only oats labelled certified gluten-free are safe for celiac disease.',
+'soy':'<strong>Soy sauce — usually contains wheat.</strong> Regular soy sauce is brewed with wheat. Use tamari, which is usually gluten-free, and always check the label.',
+'corn':'<strong>Corn / maize — naturally gluten-free.</strong> Cornmeal, polenta and corn tortillas are safe, but check for cross-contact warnings on the packet.',
+'quinoa':'<strong>Quinoa — naturally gluten-free.</strong> Rinse well before cooking. Check the packet for a gluten-free claim if you have celiac disease.',
+'barley':'<strong>Barley — contains gluten.</strong> Avoid barley, malt, and malt vinegar. Barley is one of the three main gluten grains, with wheat and rye.',
+'rye':'<strong>Rye — contains gluten.</strong> Avoid rye bread, rye flour and crispbreads made with rye.',
+'buckwheat':'<strong>Buckwheat — naturally gluten-free.</strong> Despite the name, buckwheat is not wheat. Check that the flour is made in a gluten-free facility.',
+'lentils':'<strong>Lentils — naturally gluten-free.</strong> Rinse and sort them, as stray wheat grains can sometimes get mixed in during harvest.',
+'couscous':'<strong>Couscous — contains gluten.</strong> Couscous is made from wheat semolina. Use rice, quinoa or gluten-free pasta instead.'};
+document.getElementById('ingOut').innerHTML=r[v];}
+function gfMealPlan(){var d=document.getElementById('gfDay').value;
+var plans={'Monday':['Rice porridge with berries','Quinoa salad with chickpeas and feta','Grilled chicken with roast potatoes and green beans'],
+'Tuesday':['Gluten-free toast with eggs and avocado','Lentil soup with gluten-free bread','Salmon with rice and steamed broccoli'],
+'Wednesday':['Yoghurt with certified gluten-free oats and fruit','Rice paper rolls with prawns','Beef stir-fry with rice noodles'],
+'Thursday':['Gluten-free pancakes with banana','Chicken and vegetable soup with rice','Pork chops with mashed potato and carrots'],
+'Friday':['Smoothie bowl with gluten-free granola','Tuna salad with potatoes','Gluten-free pasta with tomato and basil'],
+'Saturday':['Gluten-free waffles with berries','Baked potatoes with beans and cheese','Roast lamb with roast vegetables'],
+'Sunday':['Eggs, gluten-free toast and grilled tomatoes','Roast chicken dinner with all the trimmings','Vegetable curry with rice and gluten-free naan']};
+var p=plans[d]||plans['Monday'];
+document.getElementById('gfMealOut').innerHTML='<strong>'+d+'</strong><br>Breakfast: '+p[0]+'<br>Lunch: '+p[1]+'<br>Dinner: '+p[2];}
+
+</script>
+</body>
+</html>
